@@ -298,6 +298,12 @@ def start_gui():
     root.geometry("300x150")
     root.resizable(False, False)
     root.eval('tk::PlaceWindow . center')
+    try:
+        root.iconbitmap("icon.ico") # Zakładamy, że my_icon.ico jest w tym samym katalogu
+    except tk.TclError:
+        print("Nie znaleziono pliku ikony 'my_icon.ico' lub wystąpił błąd.")
+        # Opcjonalnie: można ustawić domyślną ikonę lub zignorować
+        pass
 
     label = tk.Label(root, text="Wybierz tryb działania aplikacji:", font=("Helvetica", 12, "bold"))
     label.pack(pady=15)
@@ -323,6 +329,7 @@ def start_gui():
 
 if __name__ == "__main__":
     # Jeśli skrypt uruchomiono z argumentem do cichej blokady, wykonaj ją.
+    
     data_login_path = current_path/"data_login.txt"
     date_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")  # Format YYYY-MM-DD HH:MM:SS
     print(type(date_string))
